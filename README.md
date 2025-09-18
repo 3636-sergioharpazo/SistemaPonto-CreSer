@@ -38,3 +38,158 @@ Permite:
 
 ### 4️⃣ Configuração do Sistema
 1. Localize o arquivo:
+4️⃣ Configuração do Sistema
+
+Localize o arquivo config.php e edite os dados do banco de dados:
+
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'nome_do_banco');
+define('DB_USER', 'usuario_do_banco');
+define('DB_PASS', 'senha_do_banco');
+
+
+Verifique se o seu servidor possui PDO habilitado para PHP.
+
+🌐 Webhooks da API do SistemaPonto-CrêSer
+
+O sistema disponibiliza endpoints para integração externa via webhooks, permitindo cadastrar, consultar, editar e excluir registros de ponto.
+
+🔒 Todos os webhooks devem ser chamados com um token de autenticação para segurança.
+
+🔹 URL Base
+https://creseradm.com/webhook_ponto.php
+
+🔹 Parâmetros de Autenticação
+
+token: token de segurança definido no sistema (ex: seuTokenSeguro123)
+
+1️⃣ Cadastrar Ponto
+
+Endpoint: POST ?acao=cadastrar&token=SEU_TOKEN
+
+Exemplo JSON:
+
+{
+  "funcionario": "João Silva",
+  "tipo_registro": "entrada",
+  "latitude": "-23.5505",
+  "longitude": "-46.6333",
+  "endereco": "Av. Paulista, São Paulo"
+}
+
+
+Exemplo cURL:
+
+curl -X POST "https://creseradm.com/webhook_ponto.php?acao=cadastrar&token=seuTokenSeguro123" \
+-H "Content-Type: application/json" \
+-d '{
+  "funcionario": "João Silva",
+  "tipo_registro": "entrada",
+  "latitude": "-23.5505",
+  "longitude": "-46.6333",
+  "endereco": "Av. Paulista, São Paulo"
+}'
+
+
+Resposta:
+
+{
+  "status": "sucesso",
+  "msg": "Ponto registrado com sucesso"
+}
+
+2️⃣ Consultar Ponto
+
+Endpoint: GET ?acao=consultar&token=SEU_TOKEN&funcionario=João Silva&data_inicial=2025-09-01&data_final=2025-09-18
+
+Exemplo cURL:
+
+curl -X GET "https://creseradm.com/webhook_ponto.php?acao=consultar&token=seuTokenSeguro123&funcionario=João Silva&data_inicial=2025-09-01&data_final=2025-09-18"
+
+
+Resposta:
+
+[
+  {
+    "id": 123,
+    "nome": "João Silva",
+    "tipo_registro": "entrada",
+    "data_atual": "2025-09-18",
+    "hora_atual": "08:00:00",
+    "latitude": "-23.5505",
+    "longitude": "-46.6333",
+    "endereco": "Av. Paulista, São Paulo"
+  }
+]
+
+3️⃣ Editar Ponto
+
+Endpoint: PUT ?acao=editar&token=SEU_TOKEN
+
+Exemplo JSON:
+
+{
+  "id": 123,
+  "tipo_registro": "entrada",
+  "hora": "08:30:00",
+  "latitude": "-23.5510",
+  "longitude": "-46.6320",
+  "endereco": "Av. Paulista, São Paulo"
+}
+
+
+Exemplo cURL:
+
+curl -X PUT "https://creseradm.com/webhook_ponto.php?acao=editar&token=seuTokenSeguro123" \
+-H "Content-Type: application/json" \
+-d '{
+  "id": 123,
+  "tipo_registro": "entrada",
+  "hora": "08:30:00",
+  "latitude": "-23.5510",
+  "longitude": "-46.6320",
+  "endereco": "Av. Paulista, São Paulo"
+}'
+
+
+Resposta:
+
+{
+  "status": "sucesso",
+  "msg": "Registro atualizado com sucesso"
+}
+
+4️⃣ Excluir Ponto
+
+Endpoint: DELETE ?acao=excluir&token=SEU_TOKEN
+
+Exemplo JSON:
+
+{
+  "id": 123
+}
+
+
+Exemplo cURL:
+
+curl -X DELETE "https://creseradm.com/webhook_ponto.php?acao=excluir&token=seuTokenSeguro123" \
+-H "Content-Type: application/json" \
+-d '{"id":123}'
+
+
+Resposta:
+
+{
+  "status": "sucesso",
+  "msg": "Registro excluído com sucesso"
+}
+
+🔹 Observações
+
+Todos os webhooks retornam JSON.
+
+Recomenda-se usar HTTPS para segurança.
+
+O webhook reutiliza toda a lógica interna de registro de ponto, garantindo que cálculos de horas e saldo sejam atualizados automaticamente.
+
+As operações de edição e exclusão devem ser feitas apenas por sistemas autorizados.
