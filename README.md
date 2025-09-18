@@ -1,231 +1,83 @@
-SistemaPonto-CrêSer
+# TCPDF
+*PHP PDF Library*
 
-Sistema de Ponto Digital – Controle de entradas e saídas de colaboradores com validação de IP, geolocalização e interface responsiva.
+[![Donate via PayPal](https://img.shields.io/badge/donate-paypal-87ceeb.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&currency_code=GBP&business=paypal@tecnick.com&item_name=donation%20for%20TCPDF%20project)
+*Please consider supporting this project by making a donation via [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&currency_code=GBP&business=paypal@tecnick.com&item_name=donation%20for%20TCPDF%20project)*
 
-📋 Visão Geral
+* **category**    Library
+* **author**      Nicola Asuni <info@tecnick.com>
+* **copyright**   2002-2024 Nicola Asuni - Tecnick.com LTD
+* **license**     http://www.gnu.org/copyleft/lesser.html GNU-LGPL v3 (see LICENSE.TXT)
+* **link**        http://www.tcpdf.org
+* **source**      https://github.com/tecnickcom/TCPDF
 
-O SistemaPonto-CrêSer é uma aplicação web desenvolvida em PHP e JavaScript para registrar e gerenciar o ponto eletrônico de colaboradores.
 
-Funcionalidades principais:
+## NOTE
+A new version of this library is under development at https://github.com/tecnickcom/tc-lib-pdf and as a consequence this library is in support only mode.
 
-Registro de entrada, saída e intervalos de forma segura
 
-Validação por IP cadastrado
 
-Registro de geolocalização em tempo real
+## Description
 
-Consulta e edição de pontos por período
+PHP library for generating PDF documents on-the-fly.
 
-Relatórios exportáveis em PDF e Excel
+### Main Features:
+* no external libraries are required for the basic functions;
+* all standard page formats, custom page formats, custom margins and units of measure;
+* UTF-8 Unicode and Right-To-Left languages;
+* TrueTypeUnicode, OpenTypeUnicode v1, TrueType, OpenType v1, Type1 and CID-0 fonts;
+* font subsetting;
+* methods to publish some XHTML + CSS code, Javascript and Forms;
+* images, graphic (geometric figures) and transformation methods;
+* supports JPEG, PNG and SVG images natively, all images supported by GD (GD, GD2, GD2PART, GIF, JPEG, PNG, BMP, XBM, XPM) and all images supported via ImagMagick (http://www.imagemagick.org/script/formats.php)
+* 1D and 2D barcodes: CODE 39, ANSI MH10.8M-1983, USD-3, 3 of 9, CODE 93, USS-93, Standard 2 of 5, Interleaved 2 of 5, CODE 128 A/B/C, 2 and 5 Digits UPC-Based Extension, EAN 8, EAN 13, UPC-A, UPC-E, MSI, POSTNET, PLANET, RMS4CC (Royal Mail 4-state Customer Code), CBC (Customer Bar Code), KIX (Klant index - Customer index), Intelligent Mail Barcode, Onecode, USPS-B-3200, CODABAR, CODE 11, PHARMACODE, PHARMACODE TWO-TRACKS, Datamatrix, QR-Code, PDF417;
+* JPEG and PNG ICC profiles, Grayscale, RGB, CMYK, Spot Colors and Transparencies;
+* automatic page header and footer management;
+* document encryption up to 256 bit and digital signature certifications;
+* transactions to UNDO commands;
+* PDF annotations, including links, text and file attachments;
+* text rendering modes (fill, stroke and clipping);
+* multiple columns mode;
+* no-write page regions;
+* bookmarks, named destinations and table of content;
+* text hyphenation;
+* text stretching and spacing (tracking);
+* automatic page break, line break and text alignments including justification;
+* automatic page numbering and page groups;
+* move and delete pages;
+* page compression (requires php-zlib extension);
+* XOBject Templates;
+* Layers and object visibility.
+* PDF/A-1b support.
 
-Painel administrativo para gerenciamento de usuários e permissões
+### Third party fonts:
 
-🛠 Tecnologias
+This library may include third party font files released with different licenses.
 
-Backend: PHP 7.4+ (PDO habilitado)
+All the PHP files on the fonts directory are subject to the general TCPDF license (GNU-LGPLv3),
+they do not contain any binary data but just a description of the general properties of a particular font.
+These files can be also generated on the fly using the font utilities and TCPDF methods.
 
-Frontend: HTML5, CSS3, JavaScript (Bootstrap 4+)
+All the original binary TTF font files have been renamed for compatibility with TCPDF and compressed using the gzcompress PHP function that uses the ZLIB data format (.z files).
 
-Banco de Dados: MySQL/MariaDB
+The binary files (.z) that begins with the prefix "free" have been extracted from the GNU FreeFont collection (GNU-GPLv3).
+The binary files (.z) that begins with the prefix "pdfa" have been derived from the GNU FreeFont, so they are subject to the same license.
+For the details of Copyright, License and other information, please check the files inside the directory fonts/freefont-20120503
+Link : http://www.gnu.org/software/freefont/
 
-Bibliotecas: SweetAlert, DataTables, Chart.js (opcional)
+The binary files (.z) that begins with the prefix "dejavu" have been extracted from the DejaVu fonts 2.33 (Bitstream) collection.
+For the details of Copyright, License and other information, please check the files inside the directory fonts/dejavu-fonts-ttf-2.33
+Link : http://dejavu-fonts.org
 
-📦 Instalação
-1️⃣ Requisitos
+The binary files (.z) that begins with the prefix "ae" have been extracted from the Arabeyes.org collection (GNU-GPLv2).
+Link : http://projects.arabeyes.org/
 
-Servidor PHP 7.4+ com PDO habilitado
+### ICC profile:
 
-MySQL/MariaDB
+TCPDF includes the sRGB.icc profile from the icc-profiles-free Debian package:
+https://packages.debian.org/source/stable/icc-profiles-free
 
-FTP ou gerenciador de arquivos
 
-Acesso ao phpMyAdmin ou equivalente
+## Developer(s) Contact
 
-2️⃣ Download
-
-Baixe o projeto diretamente do GitHub:
-📥 Download ZIP
-
-3️⃣ Upload
-
-Extraia o ZIP localmente e envie todo o conteúdo para a pasta raiz do domínio ou subdomínio (public_html).
-
-4️⃣ Configuração do Banco de Dados
-
-Crie um banco de dados MySQL.
-
-Crie um usuário com permissões totais para o banco.
-
-Importe /database/banco.sql via phpMyAdmin.
-
-5️⃣ Configuração do Sistema
-
-Edite o arquivo config.php:
-
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'nome_do_banco');
-define('DB_USER', 'usuario_do_banco');
-define('DB_PASS', 'senha_do_banco');
-
-🌐 API / Webhooks
-
-O sistema fornece endpoints RESTful para integração externa, permitindo cadastrar, consultar, editar e excluir registros de ponto.
-
-URL Base:
-
-https://creseradm.com/webhook_ponto.php
-
-
-Autenticação:
-
-token (string) – token de segurança definido no sistema.
-
-🔹 Parâmetros Comuns
-Parâmetro	Tipo	Obrigatório	Descrição
-token	string	Sim	Token de autenticação da API
-funcionario	string	Sim (para cadastrar)	Nome do colaborador
-tipo_registro	string	Sim (para cadastrar/editar)	Tipo de registro (entrada, saida, intervalo_almoco_entrada, intervalo_almoco_saida, saida_temporaria, retorno_saida_temporaria)
-latitude	string	Sim (para cadastrar/editar)	Latitude do registro
-longitude	string	Sim (para cadastrar/editar)	Longitude do registro
-endereco	string	Sim (para cadastrar/editar)	Endereço do registro
-id	int	Sim (para editar/excluir)	ID do ponto no banco
-hora	string	Opcional (para editar)	Hora do registro (HH:MM:SS)
-data_inicial	string	Opcional (para consulta)	Data inicial do filtro (YYYY-MM-DD)
-data_final	string	Opcional (para consulta)	Data final do filtro (YYYY-MM-DD)
-1️⃣ Cadastrar Ponto
-
-Endpoint: POST ?acao=cadastrar&token=SEU_TOKEN
-Headers: Content-Type: application/json
-
-Payload JSON:
-
-{
-  "funcionario": "João Silva",
-  "tipo_registro": "entrada",
-  "latitude": "-23.5505",
-  "longitude": "-46.6333",
-  "endereco": "Av. Paulista, São Paulo"
-}
-
-
-Exemplo cURL:
-
-curl -X POST "https://creseradm.com/webhook_ponto.php?acao=cadastrar&token=seuTokenSeguro123" \
--H "Content-Type: application/json" \
--d '{
-  "funcionario": "João Silva",
-  "tipo_registro": "entrada",
-  "latitude": "-23.5505",
-  "longitude": "-46.6333",
-  "endereco": "Av. Paulista, São Paulo"
-}'
-
-
-Resposta:
-
-{
-  "status": "sucesso",
-  "msg": "Ponto registrado com sucesso"
-}
-
-2️⃣ Consultar Ponto
-
-Endpoint: GET ?acao=consultar&token=SEU_TOKEN&funcionario=NOME&data_inicial=YYYY-MM-DD&data_final=YYYY-MM-DD
-
-Exemplo cURL:
-
-curl -X GET "https://creseradm.com/webhook_ponto.php?acao=consultar&token=seuTokenSeguro123&funcionario=João Silva&data_inicial=2025-09-01&data_final=2025-09-18"
-
-
-Resposta:
-
-[
-  {
-    "id": 123,
-    "nome": "João Silva",
-    "tipo_registro": "entrada",
-    "data_atual": "2025-09-18",
-    "hora_atual": "08:00:00",
-    "latitude": "-23.5505",
-    "longitude": "-46.6333",
-    "endereco": "Av. Paulista, São Paulo"
-  }
-]
-
-3️⃣ Editar Ponto
-
-Endpoint: PUT ?acao=editar&token=SEU_TOKEN
-Headers: Content-Type: application/json
-
-Payload JSON:
-
-{
-  "id": 123,
-  "tipo_registro": "entrada",
-  "hora": "08:30:00",
-  "latitude": "-23.5510",
-  "longitude": "-46.6320",
-  "endereco": "Av. Paulista, São Paulo"
-}
-
-
-Exemplo cURL:
-
-curl -X PUT "https://creseradm.com/webhook_ponto.php?acao=editar&token=seuTokenSeguro123" \
--H "Content-Type: application/json" \
--d '{
-  "id": 123,
-  "tipo_registro": "entrada",
-  "hora": "08:30:00",
-  "latitude": "-23.5510",
-  "longitude": "-46.6320",
-  "endereco": "Av. Paulista, São Paulo"
-}'
-
-
-Resposta:
-
-{
-  "status": "sucesso",
-  "msg": "Registro atualizado com sucesso"
-}
-
-4️⃣ Excluir Ponto
-
-Endpoint: DELETE ?acao=excluir&token=SEU_TOKEN
-Headers: Content-Type: application/json
-
-Payload JSON:
-
-{
-  "id": 123
-}
-
-
-Exemplo cURL:
-
-curl -X DELETE "https://creseradm.com/webhook_ponto.php?acao=excluir&token=seuTokenSeguro123" \
--H "Content-Type: application/json" \
--d '{"id":123}'
-
-
-Resposta:
-
-{
-  "status": "sucesso",
-  "msg": "Registro excluído com sucesso"
-}
-
-⚙️ Boas Práticas e Observações Técnicas
-
-Todos os endpoints retornam JSON estruturado.
-
-Use HTTPS obrigatório para proteger token e dados sensíveis.
-
-O webhook reutiliza a lógica interna do sistema, incluindo cálculo de horas, intervalos e saldo.
-
-Operações de edição e exclusão devem ser realizadas apenas por sistemas autorizados com token válido.
-
-Campos obrigatórios devem ser validados antes do envio para evitar erros de banco de dados.
-
-Tipos de registro válidos: entrada, saida, intervalo_almoco_entrada, intervalo_almoco_saida, saida_temporaria, retorno_saida_temporaria.
+* Nicola Asuni <info@tecnick.com>
