@@ -73,7 +73,7 @@ O sistema fornece endpoints RESTful para integração externa, permitindo cadast
 
 URL Base:
 
-https://creseradm.com/webhook_ponto.php
+https://creseradm.com/
 
 
 Autenticação:
