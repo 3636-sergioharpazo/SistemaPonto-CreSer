@@ -1,95 +1,103 @@
 SistemaPonto-CrêSer
 
-Sistema de Ponto Digital
-Registro de entradas e saídas de colaboradores com controle por IP, geolocalização e interface responsiva.
+Sistema de Ponto Digital – Controle de entradas e saídas de colaboradores com validação de IP, geolocalização e interface responsiva.
 
-📋 Sobre o Sistema
+📋 Visão Geral
 
 O SistemaPonto-CrêSer é uma aplicação web desenvolvida em PHP e JavaScript para registrar e gerenciar o ponto eletrônico de colaboradores.
-Funcionalidades:
 
-Registro de entrada e saída com validação por IP cadastrado
+Funcionalidades principais:
 
-Armazenamento seguro no banco de dados
+Registro de entrada, saída e intervalos de forma segura
 
-Consulta de registros por período
+Validação por IP cadastrado
 
-Painel administrativo para gerenciamento de usuários
+Registro de geolocalização em tempo real
+
+Consulta e edição de pontos por período
 
 Relatórios exportáveis em PDF e Excel
 
-🛠 Tecnologias Utilizadas
+Painel administrativo para gerenciamento de usuários e permissões
 
-Backend: PHP 7.4+ (compatível com hospedagens compartilhadas)
+🛠 Tecnologias
 
-Frontend: HTML5, CSS3, JavaScript (com Bootstrap)
+Backend: PHP 7.4+ (PDO habilitado)
+
+Frontend: HTML5, CSS3, JavaScript (Bootstrap 4+)
 
 Banco de Dados: MySQL/MariaDB
 
-Bibliotecas Extras: SweetAlert, DataTables, Chart.js (opcional)
+Bibliotecas: SweetAlert, DataTables, Chart.js (opcional)
 
-📦 Instalação em Hospedagem Compartilhada
+📦 Instalação
 1️⃣ Requisitos
 
-PHP 7.4 ou superior com PDO habilitado
+Servidor PHP 7.4+ com PDO habilitado
 
 MySQL/MariaDB
 
-Acesso ao phpMyAdmin ou similar
-
 FTP ou gerenciador de arquivos
 
-2️⃣ Download e Upload
+Acesso ao phpMyAdmin ou equivalente
 
-Baixe o projeto do GitHub:
+2️⃣ Download
+
+Baixe o projeto diretamente do GitHub:
 📥 Download ZIP
 
-Extraia o ZIP localmente.
+3️⃣ Upload
 
-Envie todo o conteúdo para public_html ou pasta raiz do domínio/subdomínio.
+Extraia o ZIP localmente e envie todo o conteúdo para a pasta raiz do domínio ou subdomínio (public_html).
 
-3️⃣ Configuração do Banco de Dados
+4️⃣ Configuração do Banco de Dados
 
-Crie um banco MySQL via cPanel ou painel da hospedagem.
+Crie um banco de dados MySQL.
 
-Crie um usuário e associe ao banco com todas as permissões.
+Crie um usuário com permissões totais para o banco.
 
-Importe o arquivo /database/banco.sql pelo phpMyAdmin.
+Importe /database/banco.sql via phpMyAdmin.
 
-4️⃣ Configuração do Sistema
+5️⃣ Configuração do Sistema
 
-Abra o arquivo config.php.
-
-Configure os parâmetros do banco de dados:
+Edite o arquivo config.php:
 
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'nome_do_banco');
 define('DB_USER', 'usuario_do_banco');
 define('DB_PASS', 'senha_do_banco');
 
+🌐 API / Webhooks
 
-Verifique se PDO está habilitado no servidor PHP.
-
-🌐 Webhooks da API do SistemaPonto-CrêSer
-
-O sistema disponibiliza endpoints RESTful para integração externa via webhooks, permitindo cadastrar, consultar, editar e excluir registros de ponto.
-
-🔒 Autenticação obrigatória: todos os endpoints exigem um token seguro definido no sistema.
+O sistema fornece endpoints RESTful para integração externa, permitindo cadastrar, consultar, editar e excluir registros de ponto.
 
 URL Base:
 
 https://creseradm.com/webhook_ponto.php
 
 
-Parâmetro de autenticação:
+Autenticação:
 
-token: token de segurança (ex: seuTokenSeguro123)
+token (string) – token de segurança definido no sistema.
 
+🔹 Parâmetros Comuns
+Parâmetro	Tipo	Obrigatório	Descrição
+token	string	Sim	Token de autenticação da API
+funcionario	string	Sim (para cadastrar)	Nome do colaborador
+tipo_registro	string	Sim (para cadastrar/editar)	Tipo de registro (entrada, saida, intervalo_almoco_entrada, intervalo_almoco_saida, saida_temporaria, retorno_saida_temporaria)
+latitude	string	Sim (para cadastrar/editar)	Latitude do registro
+longitude	string	Sim (para cadastrar/editar)	Longitude do registro
+endereco	string	Sim (para cadastrar/editar)	Endereço do registro
+id	int	Sim (para editar/excluir)	ID do ponto no banco
+hora	string	Opcional (para editar)	Hora do registro (HH:MM:SS)
+data_inicial	string	Opcional (para consulta)	Data inicial do filtro (YYYY-MM-DD)
+data_final	string	Opcional (para consulta)	Data final do filtro (YYYY-MM-DD)
 1️⃣ Cadastrar Ponto
 
 Endpoint: POST ?acao=cadastrar&token=SEU_TOKEN
 Headers: Content-Type: application/json
-Corpo JSON:
+
+Payload JSON:
 
 {
   "funcionario": "João Silva",
@@ -113,7 +121,7 @@ curl -X POST "https://creseradm.com/webhook_ponto.php?acao=cadastrar&token=seuTo
 }'
 
 
-Resposta JSON:
+Resposta:
 
 {
   "status": "sucesso",
@@ -129,7 +137,7 @@ Exemplo cURL:
 curl -X GET "https://creseradm.com/webhook_ponto.php?acao=consultar&token=seuTokenSeguro123&funcionario=João Silva&data_inicial=2025-09-01&data_final=2025-09-18"
 
 
-Resposta JSON:
+Resposta:
 
 [
   {
@@ -148,7 +156,8 @@ Resposta JSON:
 
 Endpoint: PUT ?acao=editar&token=SEU_TOKEN
 Headers: Content-Type: application/json
-Corpo JSON:
+
+Payload JSON:
 
 {
   "id": 123,
@@ -174,7 +183,7 @@ curl -X PUT "https://creseradm.com/webhook_ponto.php?acao=editar&token=seuTokenS
 }'
 
 
-Resposta JSON:
+Resposta:
 
 {
   "status": "sucesso",
@@ -185,7 +194,8 @@ Resposta JSON:
 
 Endpoint: DELETE ?acao=excluir&token=SEU_TOKEN
 Headers: Content-Type: application/json
-Corpo JSON:
+
+Payload JSON:
 
 {
   "id": 123
@@ -199,23 +209,23 @@ curl -X DELETE "https://creseradm.com/webhook_ponto.php?acao=excluir&token=seuTo
 -d '{"id":123}'
 
 
-Resposta JSON:
+Resposta:
 
 {
   "status": "sucesso",
   "msg": "Registro excluído com sucesso"
 }
 
-⚙️ Observações Técnicas
+⚙️ Boas Práticas e Observações Técnicas
 
 Todos os endpoints retornam JSON estruturado.
 
-O webhook reutiliza toda a lógica interna de registro, incluindo cálculo de horas, intervalos e saldo.
+Use HTTPS obrigatório para proteger token e dados sensíveis.
 
-HTTPS obrigatório para proteger credenciais e dados de geolocalização.
+O webhook reutiliza a lógica interna do sistema, incluindo cálculo de horas, intervalos e saldo.
 
-Edição e exclusão devem ser feitas apenas por sistemas autorizados com token válido.
+Operações de edição e exclusão devem ser realizadas apenas por sistemas autorizados com token válido.
 
-Campos obrigatórios: funcionario, tipo_registro, latitude, longitude, endereco.
+Campos obrigatórios devem ser validados antes do envio para evitar erros de banco de dados.
 
 Tipos de registro válidos: entrada, saida, intervalo_almoco_entrada, intervalo_almoco_saida, saida_temporaria, retorno_saida_temporaria.
