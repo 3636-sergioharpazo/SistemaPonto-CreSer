@@ -80,7 +80,7 @@ Autenticação:
 
 token (string) – token de segurança definido no sistema.
 
-🔹 Parâmetros Comuns
+🔹 Parâmetros Comuns da API
 Parâmetro	Tipo	Obrigatório	Descrição
 token	string	Sim	Token de autenticação da API
 funcionario	string	Sim (para cadastrar)	Nome do colaborador
@@ -89,10 +89,9 @@ latitude	string	Sim (para cadastrar/editar)	Latitude do registro
 longitude	string	Sim (para cadastrar/editar)	Longitude do registro
 endereco	string	Sim (para cadastrar/editar)	Endereço do registro
 id	int	Sim (para editar/excluir)	ID do ponto no banco
-hora	string	Opcional (para editar)	Hora do registro (HH:MM:SS)
-data_inicial	string	Opcional (para consulta)	Data inicial do filtro (YYYY-MM-DD)
-data_final	string	Opcional (para consulta)	Data final do filtro (YYYY-MM-DD)
-
+hora	string	Opcional (para editar)	Hora do registro (formato HH:MM:SS)
+data_inicial	string	Opcional (para consulta)	Data inicial do filtro (formato YYYY-MM-DD)
+data_final	string	Opcional (para consulta)	Data final do filtro (formato YYYY-MM-DD)
 
 1️⃣ Cadastrar Ponto
 
