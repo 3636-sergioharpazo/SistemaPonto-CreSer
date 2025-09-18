@@ -135,7 +135,7 @@ Endpoint: GET ?acao=consultar&token=SEU_TOKEN&funcionario=NOME&data_inicial=YYYY
 
 Exemplo cURL:
 
-curl -X GET "https://creseradm.com/webhook_ponto.php?acao=consultar&token=seuTokenSeguro123&funcionario=João Silva&data_inicial=2025-09-01&data_final=2025-09-18"
+curl -X GET "https://creseradm.com/webhook_consulta_ponto.php?email=seuemail@creseradm.com&data_inicial=2025-09-01&data_final=2025-09-18"
 
 
 Resposta:
