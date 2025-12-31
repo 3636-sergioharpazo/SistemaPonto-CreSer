@@ -111,7 +111,7 @@ Payload JSON:
 
 Exemplo cURL:
 
-curl -X POST "https://creseradm.com/webhook_ponto.php?acao=cadastrar&token=seuTokenSeguro123" \
+curl -X POST "https://creseradm.com/webhook_registro_ponto.php?email=seuemail&acao=cadastrar&token=seuTokenSeguro123" \
 -H "Content-Type: application/json" \
 -d '{
   "funcionario": "João Silva",
